@@ -1,7 +1,7 @@
 
 # Vehicle Detection and Tracking
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=u9XTdT2nVkw" target="_blank"><img src="http://img.youtube.com/vi/u9XTdT2nVkw/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10"/>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=JZ4MyckMq_Q" target="_blank"><img src="http://img.youtube.com/vi/JZ4MyckMq_Q/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10"/>
 
 The Project
 ---
