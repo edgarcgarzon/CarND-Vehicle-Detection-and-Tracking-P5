@@ -132,19 +132,6 @@ svc.fit(X_train, y_train)
 
 
 ```python
-images = glob.glob('test_images/straight_lines*.jpg')
-images = images +  glob.glob('test_images/test*.jpg')
-
-imgs = []
-
-for idx, fname in enumerate(images):
-    
-    img = cv2.imread(fname)
-    imgs.append(img)
-```
-
-
-```python
 #Data exploration
 print("Shape", img.shape)
 print("max", np.amax(img))
@@ -322,39 +309,36 @@ The class **VehDetection** save the heatmap of the last n frames and apply a thr
 ```python
 from queue import *
 
+from collections import deque
+
 class VehDetection:
     
     IMG_SHAPE = (720, 1280)
     
     def __init__(self, n, th):
-        self.Heat = []
+        self.heatHistory = deque(maxlen = n) 
         self.n = n
         self.threshold = th
     
     def putHeatmap(self, heatmap):
-        
-        heatmap[heatmap > 0] = 1
-        
-        if(len(self.Heat) > self.n):
-            self.Heat.pop(0)
-            
-        self.Heat.append(heatmap)
+               
+        self.heatHistory.append(heatmap)
     
     def getHeatmap(self):
         
         heatmap = np.zeros(self.IMG_SHAPE).astype(np.float)
         
-        for heat in self.Heat:
+        for heat in self.heatHistory:
             heatmap = heatmap + heat
         
-        heatmap = apply_threshold(heatmap,self.threshold)
+        heatmap = apply_threshold(heatmap, self.threshold)
                 
-        return heatmap        
+        return heatmap   
 ```
 
 
 ```python
-vehDetection = VehDetection(n=10, th=2)
+vehDetection = VehDetection(n=10, th=8)
 
 def pipelinePlus(img):
     
